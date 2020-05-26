@@ -17,7 +17,7 @@ class Solution:
 
         res: List[int] = []
         i: int = 0
-        pos: int = 0
+
         while i != target:
             for x in nums:
                 for y in nums:
