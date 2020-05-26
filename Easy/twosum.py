@@ -15,20 +15,15 @@ from typing import List
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
 
-        res: List[int] = []
-        i: int = 0
+        numIndex = {}
 
-        while i != target:
-            for x in nums:
-                for y in nums:
-                    if x + y == target:
-                        i += x + y
-                        res.append(nums.index(x))
-                        res.append(nums.index(y))
-                        return res
-                    else:
-                        continue
+        for index, number in enumerate(nums):
+            if target - number in numIndex:
+                return [numIndex[target - number], index]
+            numIndex[number] = index
 
 
 solution = Solution()
 print(solution.twoSum([2, 7, 11, 10], 9))
+
+print(solution.twoSum([3, 3], 6))
