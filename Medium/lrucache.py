@@ -26,7 +26,7 @@
 class Node:
     # each node has a key and value, if a node is pointing to the initial head node then it is the head,
     # if its pointing to the initial tail then it is the tail. If its pointing to both then it is both.
-    # and it also knows its previous node and the next node after it
+    # and it also knows its previous node and the node after it.
     def __init__(self, key, value):
         self.key = key
         self.value = value
@@ -45,13 +45,16 @@ class DoubleLinkedList:
         self.initialHead.next = self.initialTail
         self.initialTail.previous = self.initialHead
 
-    # first sets the previous node of the new node to be the head node.
-    # then sets the next node of the head to point to the new node.
-    # then the next of the new node will be the tail and the previous of the tail will be the new node.
-    # [initial head] <- [new node] -> [initial tail]
+    # the newest item inserted must be the tail as its the most recently added.
+    # first sets the previous node of the new node to the tail node. (as its replacing it as the new tail).
+    # then sets the next node of the previous tail to point to the new node/new tail.
+    # then sets the next of the new tail to point to the initial tail (making it the new tail).
+    # then points the initial tails previous to the new node.
     def insert(self, node):
-        node.previous, self.initialTail.previous.next = self.initialTail.previous, node
-        node.next, self.initialTail.previous = self.initialTail, node
+        node.previous = self.initialTail.previous
+        self.initialTail.previous.next = node
+        node.next = self.initialTail
+        self.initialTail.previous = node
 
     # finds the head node. (head.next is the head node as the initial head is just a pointer to the real head)
     # points the node after the head node back to the initial head node.
@@ -67,9 +70,9 @@ class DoubleLinkedList:
         del node
         return key
 
-    # gets the passed in nodes previous node and sets its next node to be the passed in nodes next node.
-    # gets the passed in nodes next node and sets its previous node to be the passed in nodes previous node.
-    # then calls the insert function on node passed in.
+    # points the node before it to the node after it.
+    # points the node after it to the node before it.
+    # then re inserts it to the list as the tail as its the most recently used/added.
     def update(self, node):
         node.previous.next = node.next
         node.next.previous = node.previous
