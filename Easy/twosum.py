@@ -17,13 +17,13 @@ class Solution:
 
         numIndex = {}
 
-        for index, number in enumerate(nums):
-            if target - number in numIndex:
+        for index, number in enumerate(nums):  # assigning an index to each number in nums using enumerate
+            if target - number in numIndex:  # minus the number from the target and check if the remainder in numIndex
                 return [numIndex[target - number], index]
-            numIndex[number] = index
+            numIndex[number] = index  # add number to numIndex
 
 
 solution = Solution()
-print(solution.twoSum([2, 7, 11, 10], 9))
+print(solution.twoSum([2, 11, 7, 10], 9))
 
 print(solution.twoSum([3, 3], 6))
