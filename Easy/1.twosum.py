@@ -20,7 +20,7 @@ class Solution:
         for index, number in enumerate(nums):  # assigning an index to each number in nums using enumerate
             if target - number in numIndex:  # minus the number from the target and check if the remainder in numIndex
                 return [numIndex[target - number], index]
-            numIndex[number] = index  # add number to numIndex
+            numIndex[number] = index  # add number to numIndex if it isnt in there already
 
 
 solution = Solution()
